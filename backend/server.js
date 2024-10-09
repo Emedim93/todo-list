@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -10,13 +11,12 @@ app.use(bodyParser.json());
 
 //connexion à la base de données 
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'tododb',
-    password: 'Major-117',
-    port: 5432
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
 });
-
 //Routes
 app.get('/tasks', async (req, res) => {
     try {
